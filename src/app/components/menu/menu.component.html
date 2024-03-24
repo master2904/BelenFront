@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/"><fa-icon [icon]="faHome"></fa-icon> Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/usuario"><fa-icon [icon]="faUser"></fa-icon> Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/cliente"><fa-icon [icon]="faUsers"></fa-icon> Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/almacen/sucursal"><fa-icon [icon]="faIndustry"></fa-icon> Sucursales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login"><fa-icon [icon]="faSignIn"></fa-icon> Iniciar Sesion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/acerca"><fa-icon [icon]="faInfoCircle"></fa-icon> Acerca de...</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <fa-icon [icon]="faIndustry"></fa-icon> Almacen
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/almacen/categoria">Categorias</a></li>
+            <li><a class="dropdown-item" href="/almacen/producto">Productos</a></li>
+            <li><a class="dropdown-item" href="/almacen/inventario">Inventario</a></li>
+            <!-- <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <fa-icon [icon]="faDollar"></fa-icon> Ventas
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/venta/transaccion">Realizar Venta</a></li>
+            <li><a class="dropdown-item" href="/venta/historial">Historial</a></li>
+            <!-- <li><a class="dropdown-item" href="/almacen/inventario">Inventario</a></li> -->
+            <!-- <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

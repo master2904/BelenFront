@@ -1,0 +1,75 @@
+<div class="row">
+  <!-- <div class="col-sm-12 col-md-6 col-lg-3 col-xl-2" >
+    <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport" style="width: 100%;">
+      <div *cdkVirtualFor="let item of productos" class="example-item">
+        <div class="card" (click)="mostrar_tipo(item)">
+          <div class="btn btn-outline-primary card ">
+            <div style="text-align: center;">
+              <img src="{{llenar_imagen(item.imagen)}}" alt="Foto" width="80px" height="80px">
+              <h5 class="card-title" style="text-align: center;">{{item.nombre}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div> -->
+  <div class="col-xl-10 col-lg-9 col-sm-12" style="width: 100%;">
+    <br>
+    <div class="row">
+      <div class="col-3">
+        <mat-form-field appearance="fill" style="width: 80%;">
+          <mat-label>SUCURSALES</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of sucursales" [value]="item.id" (click)="mostrarProductos(item)"># {{item.numero}} <strong style="font-size: 10px;">{{item.direccion|uppercase}}</strong> </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button type="button" class="btn btn-outline-danger" (click)="pdf()" *ngIf="sucursal.id!=0"><fa-icon [icon]="faFilePdf"></fa-icon></button>
+      </div>
+      <div class="col-9">
+        <h5 style="text-align: center; font-size: 25px;">INVENTARIO</h5>
+      </div>
+    </div>
+      <div *ngFor="let item of productos;let i = index">
+        <h3 style="font-size:20px;"><span class="btn btn-sm btn-primary" *ngIf="item.productos.length>0">
+          {{item.categoria}}
+        </span></h3>
+            <table class="table table-sm table-bordered" *ngIf="item.productos.length>0">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Stock</th>
+                  <th scope="col">Cantidad Minima</th>
+                  <th scope="col">Precio(Compra)</th>
+                  <th scope="col">Precio(Venta)</th>
+              </tr>
+              </thead>
+            <tbody>
+              <tr *ngFor="let itemP of item.productos;let j =index" [ngClass]="{'alerta':alerta(itemP),'normal':!alerta(itemP)}" class="text-end">
+                <td>{{j + 1}}</td>
+                <td class="text-center">{{itemP.codigo}}</td>
+                <td class="text-start">{{itemP.descripcion}}</td>
+                <td
+                    class="prueba"
+                    [ngClass]="{'rojo':alerta(itemP),'negro':!alerta(itemP)}"
+                    (click)="modificar(itemP,1,i,j)"
+                    >{{itemP.stock}}</td>
+                <td>{{itemP.cantidad_minima}}</td>
+                <td
+                  class="prueba"
+                  (click)="modificar(itemP,2,i,j)"
+                >{{itemP.precio_compra|number:'2.2'}}</td>
+                <td
+                  class="prueba"
+                  (click)="modificar(itemP,3,i,j)"
+                >{{itemP.precio_venta|number:'2.2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+    <hr>
+  </div>
+</div>
+
+
