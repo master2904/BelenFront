@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environments.prod';
 import { Venta } from '../models/venta';
+import { Grafico } from '../models/grafico';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,11 @@ export class VentaService {
   listar():Observable<Venta[]>{
     return this.http.get<Venta[]>(`${this.base}venta`);
   }
+  meses(sucursal:number,gestion:number):Observable<Grafico[][]>{
+    return this.http.get<Grafico[][]>(`${this.base}venta/meses/`+sucursal+'/'+gestion);
+  }
   nuevo(form:any):Observable<Venta>{
-    return this.http.post<Venta>(`${this.base}venta`,form);
+    return this.http.post<Venta>(`${this.base}venta`,form,{headers:{'Authorization':''+localStorage.getItem('tokenBelen')}});
   }
   eliminar(id:number):Observable<Venta>{
     return this.http.delete<Venta>(`${this.base}venta/`+id);

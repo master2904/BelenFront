@@ -13,8 +13,11 @@ import { ClienteService } from 'src/app/services/cliente.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SucursalService } from 'src/app/services/sucursal.service';
 import { VentaService } from 'src/app/services/venta.service';
-import { faCancel, faLeftLong,faRightLong, faDollar} from '@fortawesome/free-solid-svg-icons';
+import { faCancel, faLeftLong,faRightLong, faDollar,faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 import { environment } from 'src/environments/environments.prod';
+import Swal from 'sweetalert2';
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 @Component({
   selector: 'app-transaccion',
   templateUrl: './transaccion.component.html',
@@ -26,6 +29,7 @@ export class TransaccionComponent implements OnInit{
   faLeftLong=faLeftLong
   faRightLong=faRightLong
   faDollar=faDollar
+  faPlusCircle=faPlusCircle
   title = 'Producto';
   // formularios
   nombreProducto = new FormControl('');
@@ -46,17 +50,14 @@ export class TransaccionComponent implements OnInit{
   base=environment.base
   constructor(
     private toastr: ToastrService,
-    private dialog:MatDialog,
-    private dialogo:MatDialog,
     private sucursalServicio:SucursalService,
     private productoServicio:ProductoService,
-    private cliente:ClienteService,
-    private ventaServicio:VentaService) {
+    private ventaServicio:VentaService
+  ) {
     this.formProducto={} as Producto
     this.formCliente={} as Cliente
     this.formVenta={} as Venta
     this.filtroProducto = this.nombreProducto.valueChanges.pipe(startWith(''),
-        // map(value => this._filter_producto(value || '')),
       map(state => (state ? this._filter_producto(state) : this.productos.slice())),
     );
   }
@@ -97,7 +98,7 @@ export class TransaccionComponent implements OnInit{
   get nit(){return this.nuevo.get('nit'); }
 
   seleccionarProducto(s:Producto){
-    this.cantidad?.setValidators([Validators.required,Validators.max(s.stock)])
+    this.cantidad?.setValidators([Validators.required,Validators.min(1),Validators.max(s.stock)])
     this.cantidad?.updateValueAndValidity()
     this.formProducto.id=s.id;
     this.formProducto.descripcion=s.descripcion;
@@ -125,7 +126,7 @@ export class TransaccionComponent implements OnInit{
     formHistorial.precio=(this.precio?.value!= undefined)?+(this.precio?.value):0
     formHistorial.subTotal=formHistorial.precio*formHistorial.cantidad;
     formHistorial.producto_id=(this.producto_id?.value!=undefined)?+(this.producto_id.value):0
-    // this.total+=formHistorial.sub_total_venta
+    this.total+=formHistorial.subTotal
     let v=[];
     v.push(this.formProducto.codigo)
     v.push(this.formProducto.descripcion)
@@ -149,8 +150,8 @@ export class TransaccionComponent implements OnInit{
     if(this.cantidad?.hasError("min"))
       return "Cantidad Invalida"
     if(this.cantidad?.hasError('max'))
-      console.log(this.cantidad.status)
       return "Cantidad insuficiente en almacen";
+    // console.log(this.cantidad.status)
     return "";
   }
   error_precio(){
@@ -182,15 +183,13 @@ export class TransaccionComponent implements OnInit{
   //   });
   }
   realizar_venta(){
-    console.log(this.formCliente)
     let fecha:Date;
     fecha = new Date;
-    let fecha1=""+fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+(fecha.getDate());
     this.formVenta={
       id:0,
       cliente_id:this.formCliente.id,
       fecha:fecha,
-      total:0,
+      total:this.total,
       user_id:0,
     }
     let form={
@@ -198,70 +197,81 @@ export class TransaccionComponent implements OnInit{
       venta:this.formVenta,
       historial:this.matriz
     }
-    console.log(form)
-    // let formulario_venta:Venta={id:0,id_cliente:+localStorage.getItem('n3'),id_usuario:+localStorage.getItem('data'),fecha:fecha1};
-  //   console.log(this.f)
-  //   this.venta.nuevo(this.f).subscribe(data=>{
-  //     console.log(data)
-  //     this.pdf(data);
-  //     this.toastr.success("Venta Realizada","Exito");
-  //     location.reload();
-  //   },
-  //   error=>{
-  //     let e=error.status;
-  //     console.log(e)
-  //     this.toastr.error("error","No se pudo realizar la venta")
-  //   }
-  //   )
+  // console.log(form)
+    this.ventaServicio.nuevo(form).subscribe(
+      data=>{
+        this.toastr.success("Venta Realizada","Exito");
+        this.pdf(data);
+        location.reload();
+      },
+      error=>{
+        let e=error.status;
+        console.log(e)
+        this.toastr.error("error","No se pudo realizar la venta")
+      }
+    )
   }
   pdf(data:any){
-  //     let v=data[0][0]
-  //     let h=data[1][0]
-  //     let datos=[]
-  //     let c=1
-  //     console.log(h)
-  //     h.forEach(w => {
-  //       let t=[]
-  //       t.push(c++)
-  //       t.push(w.id_detalle)
-  //       t.push(w.cantidad)
-  //       t.push(w.precio_venta)
-  //       t.push(w.sub_total_venta)
-  //       datos.push(t)
-  //     });
-  //     let t=["TOTAL","","","",v.total_venta]
-  //     datos.push(t)
-  //     console.log(datos)
-  //     let fecha=new Date();
-  //     const titulo="venta "+fecha;
-  //     const doc = new jsPDF('p', 'pt', 'letter');
-  //     doc.setFont('helvetica','bold')
-  //     doc.setFontSize(15);
-  //     // doc.text("COMERCIAL FERR-OLAM",210,25);
-  //     // doc.text("VENTA",270,50);
-  //     doc.setFont('helvetica','normal')
-  //     doc.setFontSize(9);
-  //     doc.text("NIT/CI:_________________________________________________",30,60);
-  //     doc.text("Nombre:________________________________________________",30,80);
-  //     doc.text(v.nit,70,60)
-  //     doc.text(v.nombre,70,80)
-  //     doc.setFontSize(9);
-  //     let cabeza=['Nº','DESCRIPCION','CANTIDAD','PRECIO','SUB TOTAL']
-  //     autoTable(doc,{columns:cabeza,bodyStyles:{fontSize:8},body:datos,theme:'grid',pageBreak:'auto',headStyles:{fillColor:[100,100,100],textColor:[255,255,255],fontSize:7},startY:100})
-  //     // addFooters(doc);
-  //   doc.save(titulo+'.pdf')
-
+      let venta:any=data['venta']
+      let historial:Historial[]=data['historial']
+      let datos=[]
+      let c=1
+      historial.forEach(item => {
+        let t=[]
+        t.push(c++)
+        t.push(item.nombre)
+        t.push(item.cantidad)
+        t.push(item.precio.toFixed(2))
+        t.push((item.cantidad*item.precio).toFixed(2))
+        datos.push(t)
+      });
+      let t=["TOTAL","","","",venta.total.toFixed(2)]
+      datos.push(t)
+      console.log(datos)
+      let fecha=new Date();
+      const titulo="venta "+fecha;
+      const doc = new jsPDF('p', 'pt', 'letter');
+      doc.setFont('helvetica','bold')
+      doc.setFontSize(15);
+      doc.text("COMERCIAL BELEN",220,25);
+      doc.setFont('helvetica','normal')
+      doc.setFontSize(9);
+      doc.text("NIT/CI:_________________________________________________",40,60);
+      doc.text("Nombre:________________________________________________",40,80);
+      doc.text(venta.nit,90,60)
+      doc.text(venta.nombre,90,80)
+      doc.setFontSize(9);
+      let cabeza=['Nº','DESCRIPCION','CANTIDAD','PRECIO','SUB TOTAL']
+      autoTable(
+        doc,
+        {
+          columns:cabeza,
+          bodyStyles:{fontSize:8},
+          body:datos,
+          theme:'grid',
+          pageBreak:'auto',
+          headStyles:{fillColor:[100,100,100],textColor:[255,255,255],fontSize:7},
+          startY:100,
+          columnStyles: {
+            0: { halign: 'right' },
+            2: { halign: 'right' },
+            3: { halign: 'right' },
+            4: { halign: 'right' },
+          }
+        }
+      )
+      // addFooters(doc);
+    doc.save(titulo+'.pdf')
+    doc.autoPrint();
+    window.open(doc.output('bloburl'), '_blank');
   }
   recibirClienteId(datos:string){
     this.formCliente.id=+datos
-    console.log(datos)
   }
   recibirClienteNombre(datos:string){
     this.formCliente.nombre=datos
-    console.log(datos)
   }
   recibirClienteNit(datos:string){
     this.formCliente.nit=datos
-    console.log(datos)
   }
 }

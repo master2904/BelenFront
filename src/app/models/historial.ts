@@ -3,6 +3,7 @@ export interface Historial {
   producto_id:number,
   cantidad:number,
   precio:number,
+  nombre?:string,
   subTotal?:number
 }
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
-
+import { AsyncPipe, CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
 import { VentaRoutingModule } from './venta-routing.module';
 import { HistorialComponent } from './historial/historial.component';
 import { TransaccionComponent } from './transaccion/transaccion.component';
@@ -12,16 +11,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ClienteComponent } from './transaccion/cliente/cliente.component';
-
-
+import { EstadisticosComponent } from './estadisticos/estadisticos.component';
+import { MatCardModule} from '@angular/material/card';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     HistorialComponent,
     TransaccionComponent,
     ClienteComponent,
+    EstadisticosComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +54,15 @@ import { ClienteComponent } from './transaccion/cliente/cliente.component';
     NgFor,
     MatSlideToggleModule,
     AsyncPipe,
+    MatCardModule,
+    NgxChartsModule,
+    MatPaginatorModule,
+    NgIf,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    DatePipe
   ]
 })
 export class VentaModule { }
