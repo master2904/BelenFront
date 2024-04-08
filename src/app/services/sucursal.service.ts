@@ -13,8 +13,8 @@ export class SucursalService {
   listar(){
     return this.http.get<Sucursal[]>(`${this.base}sucursal`);
   }
-  buscar(id:number){
-    return this.http.get(`${this.base}sucursal/`+id);
+  buscar(id:number):Observable<Sucursal>{
+    return this.http.get<Sucursal>(`${this.base}sucursal/`+id);
   }
   nuevo(form:Sucursal):Observable<Sucursal[]>{
     return this.http.post<Sucursal[]>(`${this.base}sucursal`,form);

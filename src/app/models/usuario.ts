@@ -9,5 +9,5 @@ export interface Usuario {
   sucursal_id?:number;
   numero?:number;
   direccion?:string;
-
+  token?:string;
 }

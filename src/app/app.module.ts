@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SliderComponent } from './components/slider/slider.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { LoginComponent } from './components/login/login.component';
+import { SliderComponent } from './home/slider/slider.component';
+import { LoginComponent } from './home/login/login.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
@@ -45,14 +44,14 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
+import { AcercaDeComponent } from './home/acerca-de/acerca-de.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
 // import { ImgRotaDirective } from './img-rota.directive';
 @NgModule({
   declarations: [
     AppComponent,
     SliderComponent,
-    MenuComponent,
     LoginComponent,
     AcercaDeComponent,
     // ImgRotaDirective
@@ -107,7 +106,9 @@ import { ToastrModule } from 'ngx-toastr';
     FontAwesomeModule,
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

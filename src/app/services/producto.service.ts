@@ -32,8 +32,8 @@ export class ProductoService {
   eliminar(id:number):Observable<Producto[]>{
     return this.http.delete<Producto[]>(`${this.base}producto/`+id);
   }
-  actualizar(id:number,form:Producto):Observable<Producto[]>{
-    return this.http.put<Producto[]>(`${this.base}producto/`+id, form);
+  actualizar(id:number,form:Producto):Observable<Producto>{
+    return this.http.put<Producto>(`${this.base}producto/`+id, form);
   }
   subirImagen(file:File,nombre:string):Observable<any>{
     const fd = new FormData

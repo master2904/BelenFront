@@ -7,5 +7,8 @@ export interface Producto {
   cantidad_minima:number,
   precio_compra:number,
   precio_venta:number,
-  categoria_id:number
+  categoria_id:number,
+  direccion?:string,
+  numero?:number,
+  categoriaGrupo?:string,
 }

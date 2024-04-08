@@ -1,54 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { SliderComponent } from './components/slider/slider.component';
-import { LoginComponent } from './components/login/login.component';
-import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
+import { SliderComponent } from './home/slider/slider.component';
+import { LoginComponent } from './home/login/login.component';
+import { AcercaDeComponent } from './home/acerca-de/acerca-de.component';
+import { isLoggedInGuard } from './auth/guards/is-logged-in.guard';
 
 const routes: Routes = [
   {
     path:'',
-    component:SliderComponent
+    // pathMatch:'full',
+    loadChildren:()=>import('./home/home.module').then(h => h.HomeModule),
   },
+
   {
-    path:'login',
-    component:LoginComponent
-  },
-  {
-    path:'acerca',
-    component:AcercaDeComponent
-  },
-  {path:'usuario',
-    loadChildren:()=>import('./usuario/usuario.module').then(u => u.UsuarioModule),
+    path:'dashboard',
+    loadChildren:()=>import('./dashboard/dashboard.module').then(d => d.DashboardModule),
     // data:{
     //   role:'1'
     // },
-  //   // canActivate:[RolesGuard]
+    canActivate:[isLoggedInGuard]
   },
-  {
-    path:'cliente',
-    loadChildren:()=>import('./cliente/cliente.module').then(c => c.ClienteModule),
-    // data:{
-    //   role:'1'
-    // },
-  //   // canActivate:[RolesGuard]
-  },
-  {
-    path:'almacen',
-    loadChildren:()=>import('./almacen/almacen.module').then(a => a.AlmacenModule),
-    // data:{
-    //   role:'1'
-    // },
-  //   // canActivate:[RolesGuard]
-  },
-  {
-    path:'venta',
-    loadChildren:()=>import('./venta/venta.module').then(v => v.VentaModule),
-    // data:{
-    //   role:'1'
-    // },
-  //   // canActivate:[RolesGuard]
-  },
+  {path:'**',redirectTo:''}
 ];
 
 @NgModule({
