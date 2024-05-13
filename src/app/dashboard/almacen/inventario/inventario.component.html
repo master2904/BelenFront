@@ -10,7 +10,21 @@
             <mat-option *ngFor="let item of sucursales" [value]="item.id" (click)="mostrarProductos(item)"># {{item.numero}} <strong style="font-size: 10px;">{{item.direccion|uppercase}}</strong> </mat-option>
           </mat-select>
         </mat-form-field>
-        <button type="button" class="btn btn-outline-danger" (click)="pdf()" *ngIf="sucursal.id!=0"><fa-icon [icon]="faFilePdf"></fa-icon>Descargar</button>
+      </div>
+      <div class="col-7 text-end">
+        <table style="width: 100%;">
+          <tbody>
+            <tr>
+              <td class="fw-bold">
+                CAPITAL: <span class="text-success">{{capital()|number:'2.2'}}[Bs]</span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-outline-danger text-end" (click)="pdf()" *ngIf="sucursal.id!=0"><fa-icon [icon]="faFilePdf"></fa-icon>Descargar PDF</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
       <hr>
     </div>
@@ -29,6 +43,7 @@
                   <th class="col-md-1">Almacen</th>
                   <th class="col-md-1">Compra [Bs]</th>
                   <th class="col-md-1">Venta [Bs]</th>
+                  <th class="col-md-1">Utilidad [Bs]</th>
               </tr>
               </thead>
             <tbody>
@@ -58,13 +73,25 @@
                   </span>
                 </td>
                 <td class="col-md-1"
-                  class="prueba"
                   (click)="modificar(itemP,2,i,j)"
-                >{{itemP.precio_compra|number:'2.2'}}</td>
+                >
+                  <span class="azul fw-bold prueba">P.U.: {{itemP.precio_compra|number:'2.2'}}</span> <br>
+                  <span class="azul fw-bold">Total</span>: {{itemP.precio_compra*itemP.stock|number:'2.2'}}</td>
                 <td class="col-md-1"
-                  class="prueba"
                   (click)="modificar(itemP,3,i,j)"
-                >{{itemP.precio_venta|number:'2.2'}}</td>
+                >
+                <span class="azul fw-bold prueba">P.U.: {{itemP.precio_venta|number:'2.2'}}</span> <br>
+                <span class="azul fw-bold">Total</span>: {{itemP.precio_venta*itemP.stock|number:'2.2'}}
+              </td>
+                <td class="text-success fw-bold">
+                  {{(itemP.precio_venta-itemP.precio_compra)|number:'2.2'}}
+                </td>
+              </tr>
+              <tr class="text-end table-success fw-bold">
+                <td class="text-start" colspan="4">TOTAL</td>
+                <td>{{suma(item.productos,1)|number:'2.2'}}</td>
+                <td>{{suma(item.productos,2)|number:'2.2'}}</td>
+                <td>{{(suma(item.productos,2)-suma(item.productos,1))|number:'2.2'}}</td>
               </tr>
             </tbody>
           </table>

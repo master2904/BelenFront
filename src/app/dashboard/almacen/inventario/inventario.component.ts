@@ -115,6 +115,26 @@ export class InventarioComponent implements OnInit {
   }
   filterpost=[];
   public form={id:null,codigo:null,id_tipo:null,descripcion:null,cantidad:null,precio_compra:null,precio_venta:null,stock_minimo:null,created_at:null,updated_at:null};
+  suma(valor:Producto[],tipo:number):number{
+    let s=0
+    valor.forEach(item=>{
+      if(tipo==1)
+        s+=(item.precio_compra*item.stock)
+      else
+        s+=(item.precio_venta*item.stock)
+    })
+    return s
+  }
+  capital():number{
+    let s=0
+    this.productos.forEach(item=>{
+      item.productos.forEach(value=>{
+        s+=value.precio_compra*value.stock
+      })
+    })
+    return s
+  }
+
   pdf(){
       let datos:any=[]
       let c=1
@@ -125,7 +145,7 @@ export class InventarioComponent implements OnInit {
           let t=[]
           t.push(c++)
           t.push(item.codigo)
-          t.push(item.descripcion)
+          t.push(item.categoriaGrupo+" "+item.descripcion)
           t.push(" ")
           t.push(item.stock)
           t.push(item.cantidad_minima)
@@ -183,9 +203,12 @@ export class InventarioComponent implements OnInit {
             if(datos[x][y]<datos[x][y+1]){
               data.cell.styles.textColor="#ff0000"
             }
-            if(datos[x][y]==datos[x][y+1]){
-              data.cell.styles.textColor="#ffa000"
-            }
+            else
+              if(datos[x][y]==datos[x][y+1]){
+                data.cell.styles.textColor="#ffa000"
+              }
+            else
+              data.cell.styles.textColor="#006400"
           }
         }
       })

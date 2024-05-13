@@ -37,7 +37,7 @@
                       <mat-error *ngIf="password?.invalid">{{error_password()}}</mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="fill" *ngIf="rol?.value!='1' && rol?.value">
-                    <mat-label>Rol</mat-label>
+                    <mat-label>Sucursal</mat-label>
                     <mat-select matNativeControl formControlName="sucursal_id">
                         <mat-option *ngFor="let item of sucursales" value='{{item.id}}'><strong>#{{item.numero}}</strong></mat-option>
                         <!-- <mat-option *ngFor="let item of sucursales" value='{{item.id}}'><strong>#{{item.numero}}</strong>{{item.direccion}}</mat-option> -->

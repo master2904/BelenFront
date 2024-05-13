@@ -1,34 +1,41 @@
-import { NgModule } from '@angular/core';
-import { AsyncPipe, CommonModule, DatePipe, NgFor, NgIf } from '@angular/common';
-import { VentaRoutingModule } from './venta-routing.module';
-import { HistorialComponent } from './historial/historial.component';
-import { TransaccionComponent } from './transaccion/transaccion.component';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { ClienteComponent } from './transaccion/cliente/cliente.component';
+import { ImgRotaDirective } from 'src/app/img-rota.directive';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { HistorialComponent } from './historial/historial.component';
+import { TransaccionComponent } from './transaccion/transaccion.component';
 import { EstadisticosComponent } from './estadisticos/estadisticos.component';
-import { MatCardModule} from '@angular/material/card';
-import { NgxChartsModule }from '@swimlane/ngx-charts';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { VentaRoutingModule } from './venta-routing.module';
 import { AuthInterceptorInterceptor } from 'src/app/auth-interceptor.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ClienteComponent } from './transaccion/cliente/cliente.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es';
+import { DetalleComponent } from './historial/detalle/detalle.component';
+import {MatMenuModule} from '@angular/material/menu';
+
+registerLocaleData(localeEs,'es')
 @NgModule({
   declarations: [
     HistorialComponent,
     TransaccionComponent,
     ClienteComponent,
     EstadisticosComponent,
+    DetalleComponent,
   ],
   imports: [
     CommonModule,
@@ -46,28 +53,32 @@ import { AuthInterceptorInterceptor } from 'src/app/auth-interceptor.interceptor
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatAutocompleteModule,
-    MatSlideToggleModule,
+    MatMenuModule,
+    // MatAutocompleteModule,
+    // MatSlideToggleModule,
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    NgFor,
-    MatSlideToggleModule,
-    AsyncPipe,
+    // NgFor,
+    // MatSlideToggleModule,
+    // AsyncPipe,
     MatCardModule,
     NgxChartsModule,
     MatPaginatorModule,
-    NgIf,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    DatePipe
+    // NgIf,
+    // MatProgressSpinnerModule,
+    // MatTableModule,
+    // MatSortModule,
+    // MatPaginatorModule,
+    // DatePipe,
+    MatDatepickerModule,
+
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true},
+    {provide:LOCALE_ID,useValue:'es'}
   ],
 })
 export class VentaModule { }

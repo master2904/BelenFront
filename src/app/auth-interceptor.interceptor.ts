@@ -25,6 +25,7 @@ export class AuthInterceptorInterceptor implements HttpInterceptor {
       let usuarioActual=this.authServicio.usuarioActualValue
       // console.log(usuarioActual)
       if (usuarioActual){
+
         let token:string=usuarioActual.token+""
         let payload:string = token.split('.')[1];
         const value =atob(payload);

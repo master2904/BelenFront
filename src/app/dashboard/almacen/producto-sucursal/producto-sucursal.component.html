@@ -1,0 +1,9 @@
+<div class="row">
+  <form [formGroup]="buscar">
+    <mat-form-field>
+      <mat-label>Producto</mat-label>
+      <input matInput formControlName="producto" placeholder="Producto">
+    </mat-form-field>
+    <button class="btn btn-primary" [disabled]="buscar.invalid" (click)="buscarProducto()">Buscar</button>
+  </form>
+</div>

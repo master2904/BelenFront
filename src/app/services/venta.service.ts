@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environments.prod';
 import { Venta } from '../models/venta';
 import { Grafico } from '../models/grafico';
+import { Transaccion } from '../models/transaccion';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class VentaService {
   meses(sucursal:number,gestion:number):Observable<Grafico[][]>{
     return this.http.get<Grafico[][]>(`${this.base}venta/meses/`+sucursal+'/'+gestion);
   }
+  listarRango(formulario:any):Observable<Transaccion[]>{
+    return this.http.post<Transaccion[]>(`${this.base}venta/listar`,formulario,{headers:{'Authorization':''+localStorage.getItem('tokenBelen')}});
+  }
+
   nuevo(form:any):Observable<Venta>{
     return this.http.post<Venta>(`${this.base}venta`,form,{headers:{'Authorization':''+localStorage.getItem('tokenBelen')}});
   }
