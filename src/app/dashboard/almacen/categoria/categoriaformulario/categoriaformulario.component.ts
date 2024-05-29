@@ -17,12 +17,6 @@ export class CategoriaformularioComponent {
     this.id?.setValue(data.categoria.id)
     this.grupo?.setValue(data.categoria.grupo)
     this.sucursal_id?.setValue(data.categoria.sucursal_id)
-    // if(data.texto=="Editar Categoria"){
-    //   this.imagen?.clearValidators()
-    //   if(data.sucursal.imagen!="")
-    //   this.previsualizacion='http://localhost:8000/api/sucursal/imagen/'+data.sucursal.imagen
-    //   console.log(this.agregar.value)
-    // }
   }
   agregar=new FormGroup({
     id: new FormControl('',[]),

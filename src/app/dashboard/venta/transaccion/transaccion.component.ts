@@ -77,7 +77,6 @@ export class TransaccionComponent implements OnInit{
   get producto_id(){return this.nuevo.get('producto_id'); }
   ngOnInit(): void {
     this.usuario=this.authServicio.usuarioActualValue
-    console.log(this.usuario)
     if(this.usuario.rol==2 && this.usuario.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.usuario.sucursal_id).subscribe(data=>{
         this.sucursal={
@@ -100,7 +99,6 @@ export class TransaccionComponent implements OnInit{
     this.matriz.splice(0,this.matriz.length)
     this.ventas.splice(0,this.ventas.length)
     this.sucursal=item
-    console.log(this.sucursal)
     this.productoServicio.listarPorVenta(item.id).subscribe(data=>{
       this.productos=data
     })
@@ -166,7 +164,6 @@ export class TransaccionComponent implements OnInit{
       return "Cantidad Invalida"
     if(this.cantidad?.hasError('max'))
       return "Cantidad insuficiente en almacen";
-    // console.log(this.cantidad.status)
     return "";
   }
   error_precio(){
@@ -181,7 +178,6 @@ export class TransaccionComponent implements OnInit{
   }
 
   eliminar(pos:number){
-  //   console.log(pos)
   //   this.dialogo.open(DialogoComponent, {
   //     data: `¿Desea quitar este Item?`
   //   })
@@ -212,17 +208,14 @@ export class TransaccionComponent implements OnInit{
       venta:this.formVenta,
       historial:this.matriz
     }
-  // console.log(form)
     this.ventaServicio.nuevo(form).subscribe(
       data=>{
         this.toastr.success("Venta Realizada","Exito");
-        console.log(data)
         this.pdf(data);
         location.reload();
       },
       error=>{
         let e=error.status;
-        console.log(e)
         this.toastr.error("error","No se pudo realizar la venta")
       }
     )
@@ -243,7 +236,6 @@ export class TransaccionComponent implements OnInit{
       });
       let t=["TOTAL","","","",venta.total.toFixed(2)]
       datos.push(t)
-      console.log(datos)
       let fecha=new Date();
       const titulo="venta "+fecha;
       const doc = new jsPDF('p', 'pt', 'letter');

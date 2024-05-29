@@ -24,7 +24,6 @@ export class ProductoformularioComponent {
     @ Inject(MAT_DIALOG_DATA) public data:any,
     private productoServicio:ProductoService){
     this.texto=data.texto
-    console.log(data)
     this.sucursales=data.sucursal
     this.id?.setValue(data.producto.id)
     this.codigo?.setValue(data.producto.codigo)
@@ -38,7 +37,6 @@ export class ProductoformularioComponent {
       this.imagen?.clearValidators()
       if(data.producto.imagen!="")
       this.previsualizacion=this.base+'producto/imagen/'+data.producto.imagen
-      console.log(this.agregar.value)
     }
   }
   agregar=new FormGroup({
@@ -67,13 +65,11 @@ export class ProductoformularioComponent {
     return this.base+'usuario/imagen/'+img;
   }
   cargarImagen(event:any):void{
-    console.log(event.target.files)
     let file:File=<File>event.target.files[0]
     this.name=file.name
     this.nombreImagen?.setValue(this.name)
     this.previsualizar(file)
     this.productoServicio.subirImagen(file,this.name).subscribe(data=>{
-      console.log(data)
     })
   }
   previsualizar(file:File):void{

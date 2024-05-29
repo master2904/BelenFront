@@ -26,11 +26,8 @@ export class RegistrarComponent {
   get precio_venta(){return this.agregar.get('precio_venta'); }
 
   ngOnInit(): void {
-    // this.agregar=this.createFormGroup()
-    console.log( this.data)
     let x=this.data.tipo
     let v=this.data.producto
-    console.log(v)
     this.titulo = (x==1)?"Stock":((x==2)?"Precio Compra":"Precio Venta")
     this.tipo =x
     this.agregar.controls['id'].setValue(v.id);

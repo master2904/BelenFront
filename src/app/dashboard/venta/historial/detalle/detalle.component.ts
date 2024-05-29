@@ -10,7 +10,6 @@ import { Transaccion } from 'src/app/models/transaccion';
 export class DetalleComponent {
   item:Transaccion
   constructor(public dialogRef:MatDialogRef<DetalleComponent>, @ Inject (MAT_DIALOG_DATA) public data:Transaccion){
-    console.log(data)
     this.item=data
   }
   total():number{

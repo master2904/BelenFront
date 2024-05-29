@@ -75,7 +75,6 @@ export class ClienteComponent {
       this.nuevo.controls['nit'].setValue((e.target as HTMLInputElement).value)
       this.form.nit=(e.target as HTMLInputElement).value;
       this.form.id=0;
-      // console.log(this.form)
     }
   }
   form:Cliente={id:0,nombre:'',nit:'',celular:'',direccion:''}
@@ -88,6 +87,5 @@ export class ClienteComponent {
     this.cliente_id.emit(this.form.id+"")
     this.nitCliente.emit(this.form.nit)
     this.nombreCliente.emit(this.form.nombre)
-    // console.log(this.dataEntrante)
   }
 }

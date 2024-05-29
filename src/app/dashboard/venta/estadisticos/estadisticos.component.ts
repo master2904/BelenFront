@@ -107,7 +107,6 @@ explodeSlices = [false, true, false,false, true, false,false, true, false,true];
       this.gestion.push(i++)
     }
     this.user=this.authServicio.usuarioActualValue
-    console.log(this.user)
     if(this.user.rol==2 && this.user.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.user.sucursal_id).subscribe(data=>{
         this.sucursal={

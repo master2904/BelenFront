@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-producto-sucursal',
@@ -10,6 +11,14 @@ export class ProductoSucursalComponent {
   buscar=new FormGroup({
     producto: new FormControl('',)
   })
+  productos:any[]
   get producto(){return this.buscar.get('producto'); }
-  buscarProducto(){}
+  constructor(private productoServicio:ProductoService){}
+
+  buscarProducto(){
+    let data=this.producto?.value+""
+    this.productoServicio.buscarTodo(data).subscribe(ans=>{
+      this.productos=ans
+    })
+  }
 }

@@ -8,14 +8,5 @@ export const hasRoleGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
   const user=authService.usuarioActualValue.rol
   const allowedRoles= route.data?.['allowedRoles']
-  // console.log(allowedRoles.includes(user+""))
   return (allowedRoles.includes(user+"")? true:router.navigate(['/dashboard']))
-  // return authService.isLogged().pipe(
-  //   map((user)=>Boolean(user && allowedRoles.includes('3'))),
-  //   tap((hasRole)=>{
-  //     console.log(hasRole)
-  //     hasRole===false && alert('acceso negado')// router.navigate(['/']):true
-  //   }
-  //   )
-  // );
 };

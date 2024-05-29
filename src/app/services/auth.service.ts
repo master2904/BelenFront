@@ -26,6 +26,7 @@ export class AuthService {
   public get usuarioActualValue(){
     return this.usuarioActual.value
   }
+
   isLogged():Observable<Usuario>{
     return (this.usuarioActual)
   }
@@ -34,9 +35,7 @@ export class AuthService {
     return this.http.post(this.base+'login',form)
     .pipe(
       map((success:any)=>{
-        console.log(success)
         this.usuarioActual.next(success)
-        // console.log(this.usuarioActual)
         const tokenAF= `Bearer ${success.user.token}`;
         localStorage.setItem('tokenBelen',tokenAF);
         localStorage.setItem('test',JSON.stringify(success.user));

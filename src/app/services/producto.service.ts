@@ -26,6 +26,9 @@ export class ProductoService {
   buscar(id:number){
     return this.http.get(`${this.base}producto/`+id);
   }
+  buscarTodo(data:string){
+    return this.http.post<any[]>(`${this.base}producto/buscar`,data);
+  }
   nuevo(form:Producto):Observable<Producto[]>{
     return this.http.post<Producto[]>(`${this.base}producto`,form);
   }

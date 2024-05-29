@@ -52,7 +52,6 @@ export class InventarioComponent implements OnInit {
   fecha=new Date()
   ngOnInit(): void {
     this.user=this.authServicio.usuarioActualValue
-    console.log(this.user)
     if(this.user.rol==2 && this.user.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.user.sucursal_id).subscribe(data=>{
         this.sucursal={
@@ -67,7 +66,6 @@ export class InventarioComponent implements OnInit {
       this.sucursalServicio.listar().subscribe(data=>{
         this.sucursales=data
       })
-    console.log(new Date().toDateString())
   }
   mostrarProductos(item:Sucursal):void{
     this.sucursal=item

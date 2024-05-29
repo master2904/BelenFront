@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faSignOut,faSignIn,faHome,faInfoCircle, faUser,faUsers,faIndustry,faDollar } from '@fortawesome/free-solid-svg-icons';
+import { Permisos } from 'src/app/core/permisos';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,6 +11,10 @@ import { faSignOut,faSignIn,faHome,faInfoCircle, faUser,faUsers,faIndustry,faDol
 export class MenuComponent {
   constructor(){
   }
+  isAdmin():boolean{
+    return this.permisos.isAdmin()
+  }
+  permisos=new Permisos()
   faSignIn = faSignIn
   faHome = faHome
   faInfoCircle = faInfoCircle

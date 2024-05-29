@@ -25,7 +25,6 @@ export class SucursalformularioComponent {
       this.imagen?.clearValidators()
       if(data.sucursal.imagen!="")
       this.previsualizacion=this.base+data.sucursal.imagen
-      console.log(this.agregar.value)
     }
   }
   agregar=new FormGroup({
@@ -45,13 +44,11 @@ export class SucursalformularioComponent {
     return this.base+img;
   }
   cargarImagen(event:any):void{
-    console.log(event.target.files)
     let file:File=<File>event.target.files[0]
     this.name=file.name
     this.nombreImagen?.setValue(this.name)
     this.previsualizar(file)
     this.sucursalServicio.subirImagen(file,this.name).subscribe(data=>{
-      console.log(data)
     })
   }
   previsualizar(file:File):void{

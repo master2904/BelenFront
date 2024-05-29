@@ -194,19 +194,15 @@ export class UsuarioComponent implements OnInit {
       }
       let imag= new Image();
       // imag.src=this.base+imagenes[0];
-// console.log(imag)
       let cabeza=['#','Nombre Completo','Rol','Cuenta','    Imagen    ']
       // autoTable(doc,{columns:cabeza,body:data,theme:'grid',pageBreak:'auto',headStyles:{fillColor:[0,0,0],textColor:[255,255,255]},startY:180,
       autoTable(doc,{columns:cabeza,body:data,pageBreak:'auto',headStyles:{fillColor:[0,0,0],textColor:[255,255,255]},startY:180,
       didDrawCell: (data) => {
         data.row.height=50;
-        console.log(data)
         if (data.section === 'body' && data.column.index === 4) {
           data.row.height=80;
           // data.cell.width=100;
-          console.log(data.cell.text)
             imag.src=this.base+imagenes[data.row.index];
-            console.log(imag)
             // imag=this.base+data.cell.text;
             // imag=this.base+'202185131519.jpg';
           // doc.addImage(imag,"jpeg",10,10,60,60);

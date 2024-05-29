@@ -164,33 +164,17 @@ export class SucursalComponent {
         data.push(x)
       }
       let imag= new Image();
-      // imag.src=this.base+imagenes[0];
-// console.log(imag)
       let cabeza=['#','Numero','Direccion','    Imagen    ']
-      // autoTable(doc,{columns:cabeza,body:data,theme:'grid',pageBreak:'auto',headStyles:{fillColor:[0,0,0],textColor:[255,255,255]},startY:180,
       autoTable(doc,{columns:cabeza,body:data,pageBreak:'auto',headStyles:{fillColor:[0,0,0],textColor:[255,255,255]},startY:180,
       didDrawCell: (data) => {
         data.row.height=50;
         if (data.section === 'body' && data.column.index === 3) {
           data.row.height=80;
-          // data.cell.width=100;
             imag.src=this.base+imagenes[data.row.index];
-            // imag=this.base+data.cell.text;
-            // imag=this.base+'202185131519.jpg';
-          // doc.addImage(imag,"jpeg",10,10,60,60);
-          // var base64Img = 'data:image/jpeg;base64,iVBORw0KGgoAAAANS...'
             doc.addImage(imag, 'JPEG', data.cell.x + 2, data.cell.y -20, 65, 65)
           }
         }
       })
-      // const pageCount = doc.internal.getNumberOfPages()
-      // doc.setFont('helvetica', 'italic')
-      // doc.setFontSize(8)
-      // for (var i = 1; i <= pageCount; i++) {
-      //   doc.setPage(i)
-      //   doc.text('Sucursal: ' + localStorage.getItem('nombre')+" "+localStorage.getItem('apellido'), 40, doc.internal.pageSize.height-10, {align:'left'})
-      //   doc.text('Página ' + String(i) + ' de ' + String(pageCount), 550, doc.internal.pageSize.height-10, {align:'right'})
-      // }
     doc.save(titulo+'.pdf')
   }
 

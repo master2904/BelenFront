@@ -45,7 +45,6 @@ export class ProductoComponent implements OnInit{
   ) {}
   ngOnInit(): void {
     this.user=this.authServicio.usuarioActualValue
-    console.log(this.user)
     if(this.user.rol==2 && this.user.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.user.sucursal_id).subscribe(data=>{
         this.sucursal={
@@ -59,7 +58,6 @@ export class ProductoComponent implements OnInit{
     else
       this.sucursalServicio.listar().subscribe(data=>{
         this.sucursales=data
-        console.log(this.sucursales)
       })
   }
   llenar_imagen(img:string){
@@ -71,7 +69,13 @@ export class ProductoComponent implements OnInit{
       this.categorias=data
     })
   }
+  isactive(id:number):Boolean{
+    let item=localStorage.getItem('productoId')
+    let value=(item==null)?0:(+item)
+    return value==id
+3.  }
   mostrarProductos(item:Categoria):void{
+    localStorage.setItem('productoId',item.id+"")
     this.categoria=item
     this.productoServicio.listarPorCategoria(item.id).subscribe(data=>{
       this.productos=data

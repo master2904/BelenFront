@@ -28,8 +28,16 @@ mat-form-field{
   background-color: #195085;
   color: white;
 }
+.activo{
+  background-color: #195085;
+  color: white;
+}
 img{
   opacity: 0.6;
+}
+ng::deep .example-item:active{
+  background-color: #195085;
+  color: white;
 }
 .card-img-overlay{
   padding-top: 60px;

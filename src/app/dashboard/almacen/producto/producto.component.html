@@ -16,7 +16,7 @@
       <hr *ngIf="sucursal.id!=0">
       <h6 *ngIf="sucursal.id!=0" class="text-center"><strong>CATEGORIAS</strong></h6>
       <hr *ngIf="sucursal.id!=0">
-        <div *cdkVirtualFor="let item of categorias" class="example-item" (click)="mostrarProductos(item)">
+        <div *cdkVirtualFor="let item of categorias" class="example-item" [ngClass]="{'activo':isactive(item.id)==true}" (click)="mostrarProductos(item)">
           {{item.grupo|uppercase}}
         </div>
       </cdk-virtual-scroll-viewport>

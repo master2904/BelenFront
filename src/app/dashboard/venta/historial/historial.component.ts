@@ -50,7 +50,6 @@ export class HistorialComponent implements OnInit {
   }
   ngOnInit(): void {
     this.usuarioForm=this.authServicio.usuarioActualValue
-    console.log(this.usuario)
     if(this.usuarioForm.rol==2 && this.usuarioForm.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.usuarioForm.sucursal_id).subscribe(data=>{
         this.sucursal={
@@ -74,7 +73,6 @@ export class HistorialComponent implements OnInit {
   }
   buscarVentas(){
     this.venta.listarRango(this.buscar.value).subscribe(data=>{
-      console.log(data)
       this.historial=data;
     })
   }
@@ -105,7 +103,6 @@ export class HistorialComponent implements OnInit {
     });
     let t=["TOTAL","","","",total.toFixed(2)]
     datos.push(t)
-    console.log(datos)
     let fecha=new Date();
     const titulo="venta "+fecha;
     const doc = new jsPDF('p', 'pt', 'letter');

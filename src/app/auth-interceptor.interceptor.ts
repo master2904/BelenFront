@@ -23,7 +23,6 @@ export class AuthInterceptorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler): Observable<HttpEvent<any>> {
       let usuarioActual=this.authServicio.usuarioActualValue
-      // console.log(usuarioActual)
       if (usuarioActual){
 
         let token:string=usuarioActual.token+""
