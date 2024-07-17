@@ -71,6 +71,7 @@ export class CategoriaComponent implements OnInit {
           id:item.id,
           grupo:art.value.grupo,
           sucursal_id:art.value.sucursal_id,
+          codigo:art.value.codigo
         }
         this.categoriaServicio.actualizar(item.id,cat).subscribe(data=>{
           this.categorias=data
@@ -95,7 +96,8 @@ export class CategoriaComponent implements OnInit {
     cat={
       id:0,
       grupo:'',
-      sucursal_id:0
+      sucursal_id:0,
+      codigo:''
     }
     const dialogo1 = this.dialog.open(CategoriaformularioComponent, {data:{categoria:cat,texto:"Nuevo Categoria"}});
     dialogo1.afterClosed().subscribe(art => {
@@ -103,7 +105,8 @@ export class CategoriaComponent implements OnInit {
         cat={
           id:0,
           grupo:art.value.grupo,
-          sucursal_id:art.value.sucursal_id
+          sucursal_id:art.value.sucursal_id,
+          codigo:art.value.codigo
         }
         cat.sucursal_id=this.sucursal.id
         this.categoriaServicio.nuevo(cat).subscribe(data=>{

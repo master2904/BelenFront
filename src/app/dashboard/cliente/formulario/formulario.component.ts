@@ -24,18 +24,16 @@ export class FormularioComponent {
   }
   agregar=new FormGroup({
     id: new FormControl('',[]),
-    nit: new FormControl('',[Validators.required]),
-    nombre: new FormControl('',[Validators.required]),
-    celular: new FormControl('',[]),
-    direccion: new FormControl('',[]),
+    nit: new FormControl('',[Validators.required,Validators.minLength(6),Validators.maxLength(20)]),
+    nombre: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]),
+    celular: new FormControl('',[Validators.required,Validators.minLength(8),Validators.maxLength(15)]),
+    direccion: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
   })
   get nit(){return this.agregar.get('nit'); }
   get nombre(){return this.agregar.get('nombre'); }
   get celular(){return this.agregar.get('celular'); }
   get direccion(){return this.agregar.get('direccion'); }
   nuevo():void{
-    // this.enviarImagen();
-    // this.agregar.controls['img'].setValue(this.nombre_i);
   }
   cancelar() {
     this.dialogRef.close();
@@ -51,9 +49,10 @@ export class FormularioComponent {
       return  '';
   }
   error_nit() {
-    if (this.nit?.hasError('required')) {
+    if (this.nit?.hasError('required'))
       return 'Este campo es obligatorio';
-    }
+    if(this.nit?.hasError('minlength'))
+      return 'Ingrese minimo 6 digitos';
     return '';
   }
   error_celular() {
@@ -61,13 +60,14 @@ export class FormularioComponent {
       return 'Este campo es obligatorio';
     }
     if(this.celular?.hasError('minlength'))
-      return 'Ingrese minimo 3 caracteres';
-    return this.celular?.hasError('pattern') ? 'Solo se aceptan numeros y letras' : '';
+      return 'Ingrese minimo 8 digitos';
+    return this.celular?.hasError('pattern') ? 'Solo se aceptan numeros' : '';
   }
   error_direccion() {
-    if (this.direccion?.hasError('required')) {
+    if (this.direccion?.hasError('required'))
       return 'Este campo es obligatorio';
-    }
-    return ""
+    if(this.direccion?.hasError('minlength'))
+      return 'Ingrese minimo 5 caracteres';
+    return this.direccion?.hasError('pattern') ? 'Solo se aceptan numeros y letras' : '';
   }
 }

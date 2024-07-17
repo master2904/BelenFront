@@ -28,21 +28,17 @@
         <button class="btn btn-outline-primary" (click)="agregar()"><fa-icon [icon]="faPlus"></fa-icon> Nuevo Producto</button>
       </div>
       <hr *ngIf="categoria.id!=0">
-      <!-- <div class="row" *ngIf="categorias">
-        <input type="search" class="form-control" placeholder="Buscar..." name="filterPost"  [(ngModel)]="filterpost"  maxlength="20">
-      </div> -->
       <hr *ngIf="sucursal.id!=0">
       <div class="row" *ngIf="categoria.id!=0">
         <div class="col-xl-3 col-lg-3 col-sm-6" *ngFor="let item of productos;let i=index">
 
           <div class="card">
             <div class="card bg-light">
-              <div class="card-header text-white text-center fw-bold bg-primary">COD: [{{item.codigo}}]</div>
+              <div class="card-header text-white text-center fw-bold bg-primary">{{categoria.codigo}} {{ item.codigo.toString().padStart(5, '0') }}</div>
               <div style="text-align: center;">
                 <img appImgRota src="{{llenar_imagen('producto/imagen/'+item.imagen)}}" alt="Foto" width="100%" height="100px">
                 </div>
               <div class="card-body">
-                <!-- <p class="card-text text-center fw-bold"> {{item.descripcion}}</p> -->
                 <table style="width: 100%;">
                   <tr><td class="text-center fw-bold" colspan="2">{{item.descripcion}}</td></tr>
                   <tr>

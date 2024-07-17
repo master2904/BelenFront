@@ -29,7 +29,7 @@ export class ProductoComponent implements OnInit{
   filterpost='';
   sucursales:Sucursal[]=[]
   sucursal:Sucursal={id:0,imagen:'',direccion:'',numero:0}
-  categoria:Categoria={id:0,grupo:'',sucursal_id:0}
+  categoria:Categoria={id:0,grupo:'',codigo:'',sucursal_id:0}
   categorias:Categoria[]=[]
   productos:Producto[]=[]
   user:Usuario;
@@ -67,6 +67,7 @@ export class ProductoComponent implements OnInit{
     this.sucursal=item
     this.categoriaServicio.listarPorSucursal(item.id).subscribe(data=>{
       this.categorias=data
+      console.log(data)
     })
   }
   isactive(id:number):Boolean{
@@ -79,6 +80,7 @@ export class ProductoComponent implements OnInit{
     this.categoria=item
     this.productoServicio.listarPorCategoria(item.id).subscribe(data=>{
       this.productos=data
+      console.log(data)
     })
   }
   actualizar(item:Producto,i:number):void {
@@ -116,10 +118,16 @@ export class ProductoComponent implements OnInit{
     });
   }
   agregar():void{
+    let lastitem=this.productos[this.productos.length-1]
+    let lastcode=0
+    if(lastitem!=undefined)
+        lastcode=lastitem.codigo+1
+    else
+      lastcode=1
     let prod:Producto;
     prod={
       id:0,
-      codigo:0,
+      codigo:lastcode,
       descripcion:'',
       stock:0,
       cantidad_minima:0,
@@ -131,6 +139,7 @@ export class ProductoComponent implements OnInit{
     const dialogo1 = this.dialog.open(ProductoformularioComponent, {data:{producto:prod,texto:"Nuevo Producto"}});
     dialogo1.afterClosed().subscribe(art => {
       if (art!= undefined){
+        console.log(art.value)
         prod={
           id:0,
           codigo:art.value.codigo,

@@ -29,8 +29,8 @@ export class SucursalformularioComponent {
   }
   agregar=new FormGroup({
     id: new FormControl('',[]),
-    numero: new FormControl('',[Validators.required]),
-    direccion: new FormControl('',[Validators.required]),
+    numero: new FormControl('',[Validators.required,Validators.min(1),Validators.max(10)]),
+    direccion: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
     imagen: new FormControl('',[Validators.required]),
     nombreImagen: new FormControl('',[])
   })
@@ -78,7 +78,7 @@ export class SucursalformularioComponent {
     }
     if(this.direccion?.hasError('minlength'))
       return 'Ingrese minimo 3 caracteres';
-    return this.direccion?.hasError('pattern') ? 'Solo se aceptan letras' : '';
+      return this.direccion?.hasError('pattern') ? 'Solo se aceptan caracteres alfanumericos' : '';
   }
   error_imagen() {
     if (this.imagen?.hasError('required')) {

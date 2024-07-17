@@ -38,15 +38,17 @@ export class ProductoformularioComponent {
       if(data.producto.imagen!="")
       this.previsualizacion=this.base+'producto/imagen/'+data.producto.imagen
     }
+    let input=document.getElementById('descripcion')
+    input?.focus()
   }
   agregar=new FormGroup({
     id: new FormControl('',[]),
-    codigo: new FormControl('',[Validators.required]),
-    descripcion: new FormControl('',[Validators.required]),
-    stock: new FormControl('',[Validators.required,Validators.min(1),Validators.max(500)]),
-    cantidad_minima: new FormControl('',[Validators.required,Validators.min(1),Validators.max(100)]),
-    precio_compra: new FormControl('',[Validators.required,Validators.min(0.5),Validators.max(1000)]),
-    precio_venta: new FormControl('',[Validators.required,Validators.min(0.5),Validators.max(2000)]),
+    codigo: new FormControl({value:'',disabled: true },[Validators.required]),
+    descripcion: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
+    stock: new FormControl('',[Validators.required,Validators.min(1),Validators.max(2000)]),
+    cantidad_minima: new FormControl('',[Validators.required,Validators.min(5),Validators.max(10)]),
+    precio_compra: new FormControl('',[Validators.required,Validators.min(1),Validators.max(1000)]),
+    precio_venta: new FormControl('',[Validators.required,Validators.min(1),Validators.max(1000)]),
     imagen: new FormControl('',[Validators.required]),
     categoria_id: new FormControl(''),
     nombreImagen: new FormControl('',[])
@@ -83,6 +85,7 @@ export class ProductoformularioComponent {
   nuevo():void{
     // this.enviarImagen();
     // this.agregar.controls['img'].setValue(this.nombre_i);
+    this.codigo?.enable()
   }
   cancelar() {
     this.dialogRef.close();

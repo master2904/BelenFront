@@ -29,7 +29,6 @@ export class FormularioComponent {
     this.username?.setValue(data.usuario.username)
     this.password?.setValue(data.usuario.password)
     this.rol?.setValue(data.usuario.rol)
-    // this.imagen?.setValue(data.usuario.imagen)
     if(data.texto=="Editar Usuario"){
       this.password?.clearValidators()
       this.imagen?.clearValidators()
@@ -39,11 +38,11 @@ export class FormularioComponent {
   }
   agregar=new FormGroup({
     id: new FormControl('',[]),
-    nombre: new FormControl('',[Validators.required]),
+    nombre: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]),
     rol: new FormControl('',[Validators.required]),
-    apellido: new FormControl('',[Validators.required]),
-    username: new FormControl('',[Validators.required]),
-    password: new FormControl('',[Validators.required]),
+    apellido: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]),
+    username: new FormControl('',[Validators.required,Validators.minLength(4),Validators.maxLength(15)]),
+    password: new FormControl('',[Validators.required,Validators.minLength(8),Validators.maxLength(20)]),
     imagen: new FormControl('',[Validators.required]),
     sucursal_id: new FormControl('',[]),
     nombreImagen: new FormControl('',[])
@@ -107,7 +106,7 @@ export class FormularioComponent {
       return 'Este campo es obligatorio';
     }
     if(this.username?.hasError('minlength'))
-      return 'Ingrese minimo 3 caracteres';
+      return 'Ingrese minimo 4 caracteres';
     return this.username?.hasError('pattern') ? 'Solo se aceptan numeros y letras' : '';
   }
   error_rol() {

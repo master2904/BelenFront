@@ -6,25 +6,24 @@
           <form [formGroup]="agregar">
             <mat-form-field appearance="fill">
               <mat-label>Codigo</mat-label>
-                <input matInput formControlName="codigo" type="text" placeholder="codigo" name="codigo" maxlength="20" minlength="3" pattern="[A-Za-z 0-9]{3,20}">
+                <input matInput formControlName="codigo" type="number" placeholder="codigo" name="codigo" max="200" min="1">
               <mat-error *ngIf="codigo?.invalid">{{error_codigo()}}</mat-error>
-          </mat-form-field>
-
+            </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Descripcion</mat-label>
-                  <input matInput formControlName="descripcion" type="text" placeholder="Descripcion" name="descripcion" maxlength="30" minlength="3" pattern="[A-Za-z 0-9.]{3,20}">
+                  <input matInput formControlName="descripcion" type="text" id="descripcion" placeholder="Descripcion" name="descripcion" maxlength="30" minlength="3" pattern="[A-Za-z 0-9.]{3,50}" (focus)="true">
                 <mat-error *ngIf="descripcion?.invalid">{{error_descripcion()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label>stock</mat-label>
-                <input matInput formControlName="stock" type="text" placeholder="stock" name="stock">
+                <input matInput formControlName="stock" type="number" placeholder="stock" name="stock">
                 <mat-error *ngIf="stock?.invalid">{{error_stock()}}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label>Cantidad Minima</mat-label>
-                <input matInput formControlName="cantidad_minima" type="text" placeholder="Cantidad Minima" name="cantidad_minima">
+                <input matInput formControlName="cantidad_minima" type="number" placeholder="Cantidad Minima" name="cantidad_minima">
                 <mat-error *ngIf="cantidad_minima?.invalid">{{error_cantidad_minima()}}</mat-error>
             </mat-form-field>
 
