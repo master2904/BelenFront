@@ -12,7 +12,7 @@
 
             <mat-form-field appearance="fill" style="width: 100%;">
                 <mat-label>Direccion</mat-label>
-                <input matInput formControlName="direccion" type="text" placeholder="direccion" name="direccion" maxlength="50" minlength="3" pattern="[A-Za-z .#0-9ñÑ/]{3,50}">
+                <input matInput formControlName="direccion" type="text" placeholder="direccion" name="direccion" maxlength="50" minlength="3" pattern="[A-Za-z .#0-9ñÑ\/]{3,50}">
                 <mat-error *ngIf="direccion?.invalid">{{error_direccion()}}</mat-error>
             </mat-form-field>
             <p>

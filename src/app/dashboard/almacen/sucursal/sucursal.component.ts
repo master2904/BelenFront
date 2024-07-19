@@ -48,6 +48,7 @@ export class SucursalComponent {
           imagen:art.value.nombreImagen,
           direccion:art.value.direccion,
         }
+        console.log(suc)
         this.sucursalServicio.actualizar(item.id,suc).subscribe(data=>{
           this.sucursales=data
           Swal.fire({
@@ -83,6 +84,7 @@ export class SucursalComponent {
           direccion:art.value.direccion,
           numero:art.value.numero,
         }
+        console.log(item)
         this.sucursalServicio.nuevo(item).subscribe(data=>{
           this.sucursales=data
           Swal.fire({

@@ -27,6 +27,14 @@ const routes: Routes = [
         loadChildren:()=>import('./cliente/cliente.module').then(c => c.ClienteModule),
       },
       {
+        path:'proveedor',
+        canActivate:[isLoggedInGuard ,hasRoleGuard],
+        data:{
+          allowedRoles:['1','2']
+        },
+        loadChildren:()=>import('./proveedor/proveedor.module').then(p => p.ProveedorModule),
+      },
+      {
         path:'almacen',
         canActivate:[isLoggedInGuard ,hasRoleGuard],
         data:{

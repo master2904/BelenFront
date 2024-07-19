@@ -16,7 +16,7 @@ export class ProductoSucursalComponent {
   constructor(private productoServicio:ProductoService){}
 
   buscarProducto(){
-    let data=this.producto?.value+""
+    let data={producto:this.producto?.value+""}
     this.productoServicio.buscarTodo(data).subscribe(ans=>{
       this.productos=ans
     })

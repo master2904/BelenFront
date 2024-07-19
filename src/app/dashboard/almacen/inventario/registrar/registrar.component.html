@@ -6,24 +6,24 @@
               <mat-form-field appearance="fill" *ngIf="tipo==1">
                   <mat-label>Stock</mat-label>
                   <input matInput formControlName="stock" type="number" name="stock" minlength="5" maxlength="20" placeholder="Precio venta">
-                  <!-- <mat-error *ngIf="stock.invalid">{{error_stock()}}</mat-error> -->
+                  <mat-error>{{error_stock()}}</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill" *ngIf="tipo==2">
                   <mat-label>Precio Compra</mat-label>
                   <input matInput formControlName="precio_compra" type="number" name="precio_compra" minlength="5" maxlength="20" placeholder="Precio Tienda">
-                  <!-- <mat-error *ngIf="precio_compra.invalid">{{error_precio_compra()}}</mat-error> -->
+                  <mat-error >{{error_precio_compra()}}</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill" *ngIf="tipo==3">
                   <mat-label>Precio Venta</mat-label>
                   <input matInput formControlName="precio_venta" type="number" name="precio_venta" minlength="5" maxlength="20" placeholder="Precio Final">
-                  <!-- <mat-error *ngIf="precio_venta.invalid">{{error_precio_final()}}</mat-error> -->
+                  <mat-error >{{error_precio_venta()}}</mat-error>
               </mat-form-field>
 
           </form>
       </div>
   </div>
   <div mat-dialog-actions>
-      <button mat-button (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
-      <button mat-button [mat-dialog-close]="agregar" class="btn btn-danger" (click)="nuevo()">Actualizar</button>
+      <button mat-flat-button color="warn" (click)="cancelar()">Cancelar</button>
+      <button mat-flat-button color="primary" [mat-dialog-close]="agregar" (click)="nuevo()" [disabled]="agregar.invalid">Actualizar</button>
   </div>
 </div>

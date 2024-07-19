@@ -70,6 +70,7 @@ export class HistorialComponent implements OnInit {
   seleccionarSucursal(item:Sucursal){
     this.id?.setValue(item.id+"")
     this.buscarVentas()
+    this.sucursal=item
   }
   buscarVentas(){
     this.venta.listarRango(this.buscar.value).subscribe(data=>{
