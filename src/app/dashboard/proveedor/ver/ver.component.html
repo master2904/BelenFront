@@ -26,6 +26,7 @@
         <tr>
           <th>Nro</th>
           <th>Producto</th>
+          <th>Precio</th>
           <th class="text-end">Opcion</th>
         </tr>
       </thead>
@@ -33,6 +34,7 @@
         <tr *ngFor="let item of form.items;let i=index">
           <td>{{i+1}}</td>
           <td>{{item.nuevo}}</td>
+          <td>{{item.precio}}</td>
           <td class="text-end">
             <div class="btn-group" role="group" >
               <button type="button" class="btn btn-success btn-sm" (click)="actualizar(item)">
