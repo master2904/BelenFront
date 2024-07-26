@@ -36,6 +36,7 @@ export class LoginComponent {
     let form:Login={password:"",username:""}
     form.password=this.password?.value+""
     form.username=this.username?.value+""
+    localStorage.clear();
     this.dataSubscription=this.AuthServicio.login(form).subscribe(data=>{
       this.toastr.success("Haz iniciado Sesion",'En hora buena!');
       this.router.navigate(['/dashboard'])
