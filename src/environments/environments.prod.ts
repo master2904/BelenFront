@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   base: 'http://localhost:8000/api/',
+  // base: 'http://localhost:8002/api/',
 
   // http://181.115.146.26:8060/
   // base: 'http://181.115.146.26:8060/servidor/public/api/'

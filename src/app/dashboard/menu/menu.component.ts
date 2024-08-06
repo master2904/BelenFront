@@ -14,6 +14,12 @@ export class MenuComponent {
   isAdmin():boolean{
     return this.permisos.isAdmin()
   }
+  isEncargado():boolean{
+    return this.permisos.isEncargado()
+  }
+  getName():string{
+    return this.permisos.getName()
+  }
   permisos=new Permisos()
   faSignIn = faSignIn
   faHome = faHome

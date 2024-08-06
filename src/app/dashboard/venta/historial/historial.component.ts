@@ -50,7 +50,7 @@ export class HistorialComponent implements OnInit {
   }
   ngOnInit(): void {
     this.usuarioForm=this.authServicio.usuarioActualValue
-    if(this.usuarioForm.rol==2 && this.usuarioForm.sucursal_id!=undefined)
+    if((this.usuarioForm.rol==2||this.usuarioForm.rol==3) && this.usuarioForm.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.usuarioForm.sucursal_id).subscribe(data=>{
         this.sucursal={
           id:data.id,
@@ -73,6 +73,7 @@ export class HistorialComponent implements OnInit {
     this.sucursal=item
   }
   buscarVentas(){
+    console.log(this.buscar.value)
     this.venta.listarRango(this.buscar.value).subscribe(data=>{
       this.historial=data;
     })

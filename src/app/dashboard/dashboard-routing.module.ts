@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { isLoggedInGuard } from '../auth/guards/is-logged-in.guard';
 import { hasRoleGuard } from '../auth/guards/has-role.guard';
 import { DashboardComponent } from './dashboard.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
         path:'cliente',
         canActivate:[isLoggedInGuard ,hasRoleGuard],
         data:{
-          allowedRoles:['1','2']
+          allowedRoles:['1','2','3']
         },
         loadChildren:()=>import('./cliente/cliente.module').then(c => c.ClienteModule),
       },
@@ -46,12 +47,18 @@ const routes: Routes = [
         path:'venta',
         canActivate:[isLoggedInGuard ,hasRoleGuard],
         data:{
-          allowedRoles:['1','2']
+          allowedRoles:['1','2','3']
         },
         loadChildren:()=>import('./venta/venta.module').then(v => v.VentaModule),
       },
     ]
-  }
+  },
+  {path:'perfil',
+    canActivate:[isLoggedInGuard ,hasRoleGuard],
+        data:{
+          allowedRoles:['1','2','3']
+    },
+    component:PerfilComponent},
 ];
 
 @NgModule({

@@ -11,5 +11,11 @@ export class Permisos {
   isEncargado(){
     return this.user.rol==1||this.user.rol==2
   }
+  getName():string{
+    return this.user.nombre+" "+this.user.apellido
+  }
+  getRole():number{
+    return this.user.rol
+  }
 }
 

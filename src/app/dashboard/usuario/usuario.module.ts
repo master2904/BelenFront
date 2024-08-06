@@ -21,7 +21,7 @@ import { AuthInterceptorInterceptor } from 'src/app/auth-interceptor.interceptor
 @NgModule({
   declarations: [
     UsuarioComponent,
-    FormularioComponent
+    FormularioComponent,
   ],
   imports: [
     CommonModule,

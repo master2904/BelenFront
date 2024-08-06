@@ -7,19 +7,23 @@ import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuComponent } from './menu/menu.component';
+import { MatCardModule } from '@angular/material/card';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     FontAwesomeModule,
     MatIconModule,
+    MatCardModule
   ]
 })
 export class DashboardModule { }
