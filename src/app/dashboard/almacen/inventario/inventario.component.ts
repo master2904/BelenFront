@@ -11,7 +11,7 @@ import { RegistrarComponent } from './registrar/registrar.component';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { faFilePdf,faEdit,faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf,faEdit,faLongArrowAltRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { environment } from 'src/environments/environments.prod';
@@ -24,6 +24,7 @@ import { environment } from 'src/environments/environments.prod';
 export class InventarioComponent implements OnInit {
   faLongArrowAltRight=faLongArrowAltRight
   faFilePdf=faFilePdf
+  faPlus=faPlus
   title = 'Producto';
   f_productos ={id:null,nombre:null,imagen:null};
   f_tipos ={id:null,id_producto:null,descripcion:null};
@@ -95,7 +96,8 @@ export class InventarioComponent implements OnInit {
           precio_venta:art.value.precio_venta,
           stock:art.value.stock
         }
-        this.productoServicio.actualizar(prod.id,prod).subscribe((data:any)=>{
+        console.log(prod)
+        this.productoServicio.actualizarstok(prod.id,prod).subscribe((data:any)=>{
           this.productos[i].productos[j].stock=data.stock
           this.productos[i].productos[j].precio_compra=data.precio_compra
           this.productos[i].productos[j].precio_venta=data.precio_venta

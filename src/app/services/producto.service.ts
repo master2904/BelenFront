@@ -38,6 +38,10 @@ export class ProductoService {
   actualizar(id:number,form:Producto):Observable<Producto>{
     return this.http.put<Producto>(`${this.base}producto/`+id, form);
   }
+  actualizarstok(id:number,form:Producto):Observable<Producto>{
+    return this.http.put<Producto>(`${this.base}producto/actualizar/`+id, form,{headers:{'Authorization':''+localStorage.getItem('tokenBelen')}});
+  }
+
   subirImagen(file:File,nombre:string):Observable<any>{
     const fd = new FormData
     fd.append('image',file,nombre)

@@ -216,6 +216,7 @@ export class TransaccionComponent implements OnInit{
       },
       error=>{
         let e=error.status;
+        console.log(error)
         this.toastr.error("error","No se pudo realizar la venta")
       }
     )

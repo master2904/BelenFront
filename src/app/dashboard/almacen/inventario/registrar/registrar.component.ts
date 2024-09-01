@@ -28,10 +28,10 @@ export class RegistrarComponent {
   ngOnInit(): void {
     let x=this.data.tipo
     let v=this.data.producto
-    this.titulo = (x==1)?"Stock":((x==2)?"Precio Compra":"Precio Venta")
+    this.titulo = (x==1)?"Agregar al Stock":((x==2)?"Precio Compra":"Precio Venta")
     this.tipo =x
     this.agregar.controls['id'].setValue(v.id);
-    this.agregar.controls['stock'].setValue(v.stock);
+    // this.agregar.controls['stock'].setValue(v.stock);
     this.agregar.controls['precio_compra'].setValue(v.precio_compra);
     this.agregar.controls['precio_venta'].setValue(v.precio_venta);
   }
