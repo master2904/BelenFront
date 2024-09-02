@@ -32,7 +32,7 @@
                 <mat-autocomplete autoActiveFirstOption #autos="matAutocomplete">
                   <mat-option *ngFor="let item of filtroProducto | async" [value]="item.descripcion" (click)="seleccionarProducto(item)">
                     <img alt="" class="example-option-img" src="{{llenar_imagen('producto/imagen/'+item.imagen)}}" height="25">
-                    {{item.codigo}} = {{item.descripcion}}
+                    {{item.cod}} {{ item.codigo.toString().padStart(5, '0')}} = {{item.categoriaGrupo}} {{item.descripcion}}
                   </mat-option>
                 </mat-autocomplete>
                 <mat-error >{{error_producto()}}</mat-error>

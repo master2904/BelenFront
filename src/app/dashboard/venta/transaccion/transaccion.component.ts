@@ -105,7 +105,10 @@ export class TransaccionComponent implements OnInit{
   }
   private _filter_producto(value: string): any[] {
     const filterValue = value.toLowerCase();
-    return this.productos.filter(option => (option.descripcion).toLowerCase().includes(filterValue));
+    return this.productos.filter(option =>
+      (option.descripcion).toLowerCase().includes(filterValue) ||
+      (option.categoriaGrupo+'').toLowerCase().includes(filterValue)
+    );
   }
   get nombre(){return this.nuevo.get('nombre'); }
   get nit(){return this.nuevo.get('nit'); }
@@ -114,7 +117,7 @@ export class TransaccionComponent implements OnInit{
     this.cantidad?.setValidators([Validators.required,Validators.min(1),Validators.max(s.stock)])
     this.cantidad?.updateValueAndValidity()
     this.formProducto.id=s.id;
-    this.formProducto.descripcion=s.descripcion;
+    this.formProducto.descripcion=s.categoriaGrupo+' '+s.descripcion;
     this.formProducto.codigo=s.codigo;
     this.formProducto.stock=s.stock;
     this.formProducto.precio_compra=s.precio_compra;
@@ -128,7 +131,6 @@ export class TransaccionComponent implements OnInit{
       this.nuevo.controls['producto'].setValue(e)
   }
   carrito(){
-    this.vender++
     let formHistorial:Historial = {
       cantidad:0,
       precio:0,
@@ -139,6 +141,26 @@ export class TransaccionComponent implements OnInit{
     formHistorial.precio=(this.precio?.value!= undefined)?+(this.precio?.value):0
     formHistorial.subTotal=formHistorial.precio*formHistorial.cantidad;
     formHistorial.producto_id=(this.producto_id?.value!=undefined)?+(this.producto_id.value):0
+    let cantidad_validacion= this.formProducto.stock
+    let validacion=false
+    this.matriz.forEach(data=>{
+      if(formHistorial.producto_id==data.producto_id){
+        if(formHistorial.cantidad+data.cantidad > cantidad_validacion){
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "No se puede vender mas del stock actual",
+            showConfirmButton: false,
+            timer: 1500
+          })
+          validacion=true
+          return
+        }
+      }
+    })
+    if(validacion)
+      return
+    this.vender++
     this.total+=formHistorial.subTotal
     let v=[];
     v.push(this.formProducto.codigo)
@@ -152,6 +174,7 @@ export class TransaccionComponent implements OnInit{
     this.producto?.setValue('')
     this.nombreProducto.setValue('')
     this.matriz.push(formHistorial)
+    console.log(this.matriz)
   }
   validar(e:number){
     // if(this.form.cantidad<e)
@@ -177,21 +200,26 @@ export class TransaccionComponent implements OnInit{
     return "";
   }
 
-  eliminar(pos:number){
-  //   this.dialogo.open(DialogoComponent, {
-  //     data: `¿Desea quitar este Item?`
-  //   })
-  //   .afterClosed()
-  //   .subscribe((confirmado: Boolean) => {
-  //     if (confirmado) {
-  //       this.total-=this.ventas[pos][4]
-  //       this.ventas.splice(pos,1);
-  //       this.matriz.splice(pos,1);
-  //       this.toastr.warning('Item Removido')
-  //     }
-  //     else
-  //       this.toastr.info('Operacion Cancelada');
-  //   });
+  eliminar(pos:number):void{
+    Swal.fire({
+      title: 'Desea quitar este Item?',
+      text: this.matriz[pos].nombre,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      confirmButtonColor:'#3085d6',
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor:'#d33'
+    }).then((result) => {
+      if (result.value) {
+        this.total-=this.ventas[pos][4]
+        this.ventas.splice(pos,1);
+        this.matriz.splice(pos,1);
+        this.toastr.warning('Item Removido')
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.toastr.info('Operacion Cancelada');
+      }
+    });
   }
   realizar_venta(){
     let fecha:Date;
