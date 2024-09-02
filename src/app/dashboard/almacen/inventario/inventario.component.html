@@ -57,7 +57,7 @@
                 <td class="col-md-1 text-center">
                   <img appImgRota src="{{llenar_imagen(itemP.imagen)}}">
                 </td>
-                <td class="col-md-1 text-end">
+                <td class="col-md-1 text-center">
                   <span
                     class="prueba badge"
                     [ngClass]="{
@@ -68,6 +68,8 @@
                   Stock: {{itemP.stock}}
                   </span>
                   <button style="border: 0; text-align: center;font-size: 10px;" (click)="modificar(itemP,1,i,j)"><mat-icon style="color: green">add_circle</mat-icon></button>
+                  <button style="border: 0; text-align: center;font-size: 10px;" [routerLink]="['/dashboard/almacen/producto/verlog/', itemP.id]"><mat-icon style="color: blue">remove_red_eye</mat-icon></button>
+
                   <br>
                   <span class="azul">
                     <strong>Req. Minimo: {{itemP.cantidad_minima}}</strong>

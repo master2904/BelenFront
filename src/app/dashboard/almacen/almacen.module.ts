@@ -21,6 +21,7 @@ import { RegistrarComponent } from './inventario/registrar/registrar.component';
 import localeEs from '@angular/common/locales/es';
 import { ProductoSucursalComponent } from './producto-sucursal/producto-sucursal.component'
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { VerProductoLogComponent } from './inventario/ver-producto-log/ver-producto-log.component';
 
 registerLocaleData(localeEs,'es')
 
@@ -37,6 +38,7 @@ registerLocaleData(localeEs,'es')
     ImgRotaDirective,
     RegistrarComponent,
     ProductoSucursalComponent,
+    VerProductoLogComponent,
   ],
   imports: [
     CommonModule,

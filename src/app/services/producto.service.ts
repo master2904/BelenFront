@@ -24,7 +24,7 @@ export class ProductoService {
     return this.http.get<Producto[]>(`${this.base}producto/categoria/`+id);
   }
   buscar(id:number){
-    return this.http.get(`${this.base}producto/`+id);
+    return this.http.get<Producto>(`${this.base}producto/`+id);
   }
   buscarTodo(data:any){
     return this.http.post<any[]>(`${this.base}producto/buscar`,data);
@@ -41,7 +41,9 @@ export class ProductoService {
   actualizarstok(id:number,form:Producto):Observable<Producto>{
     return this.http.put<Producto>(`${this.base}producto/actualizar/`+id, form,{headers:{'Authorization':''+localStorage.getItem('tokenBelen')}});
   }
-
+  verLog(id:number){
+    return this.http.get<any[]>(`${this.base}producto/verlog/`+id, {headers:{'Authorization':''+localStorage.getItem('tokenBelen')}});
+  }
   subirImagen(file:File,nombre:string):Observable<any>{
     const fd = new FormData
     fd.append('image',file,nombre)

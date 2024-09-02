@@ -11,7 +11,7 @@ import { RegistrarComponent } from './registrar/registrar.component';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { faFilePdf,faEdit,faLongArrowAltRight, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf,faEdit,faLongArrowAltRight, faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { environment } from 'src/environments/environments.prod';
@@ -25,6 +25,7 @@ export class InventarioComponent implements OnInit {
   faLongArrowAltRight=faLongArrowAltRight
   faFilePdf=faFilePdf
   faPlus=faPlus
+  faEye=faEye
   title = 'Producto';
   f_productos ={id:null,nombre:null,imagen:null};
   f_tipos ={id:null,id_producto:null,descripcion:null};
@@ -221,5 +222,8 @@ export class InventarioComponent implements OnInit {
         doc.text('Página ' + String(i) + ' de ' + String(pageCount), 550, doc.internal.pageSize.height-10, {align:'right'})
       }
     doc.save(titulo+'.pdf')
+  }
+  verLog(item:Producto){
+
   }
 }

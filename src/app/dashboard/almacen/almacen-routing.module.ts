@@ -7,11 +7,13 @@ import { InventarioComponent } from './inventario/inventario.component';
 import { isLoggedInGuard } from 'src/app/auth/guards/is-logged-in.guard';
 import { hasRoleGuard } from 'src/app/auth/guards/has-role.guard';
 import { ProductoSucursalComponent } from './producto-sucursal/producto-sucursal.component';
+import { VerProductoLogComponent } from './inventario/ver-producto-log/ver-producto-log.component';
 
 const routes: Routes = [
   {path:'categoria',component:CategoriaComponent},
   {path:'producto',component:ProductoComponent},
   {path:'producto/sucursal',component:ProductoSucursalComponent},
+  {path:'producto/verlog/:id',component:VerProductoLogComponent},
   {
     path:'sucursal',
     component:SucursalComponent,
