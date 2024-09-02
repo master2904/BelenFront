@@ -33,6 +33,7 @@ export class LoginComponent {
   dataSubscription: Subscription;
 
   onLogin():void{
+    localStorage.clear()
     let form:Login={password:"",username:""}
     form.password=this.password?.value+""
     form.username=this.username?.value+""
