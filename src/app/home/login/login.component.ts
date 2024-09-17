@@ -23,11 +23,17 @@ export class LoginComponent {
   error_password():string{
     if(this.password?.hasError('required'))
       return "Campo Obligatorio"
+    if(this.username?.hasError('minlength'))
+      return "Ingrese minimo 8 caracteres"
     return ""
   }
   error_cuenta():string{
     if(this.username?.hasError('required'))
       return "Campo Obligatorio"
+    if(this.username?.hasError('minlength'))
+      return "Ingrese minimo 4 caracteres"
+    if(this.username?.hasError('pattern'))
+      return "Ingrese letras y/o numeros"
     return ""
   }
   dataSubscription: Subscription;
