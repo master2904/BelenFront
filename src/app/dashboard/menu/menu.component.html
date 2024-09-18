@@ -39,7 +39,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/dashboard/venta/transaccion">Realizar Venta</a></li>
-            <li><a class="dropdown-item" href="/dashboard/venta/historial">Historial</a></li>
+            <li><a class="dropdown-item" *ngIf="isEncargado()" href="/dashboard/venta/historial">Historial</a></li>
             <li><a class="dropdown-item" *ngIf="isEncargado()" href="/dashboard/venta/estadistico">Estadisticos</a></li>
           </ul>
         </li>

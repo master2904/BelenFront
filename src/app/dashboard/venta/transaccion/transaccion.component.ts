@@ -77,7 +77,9 @@ export class TransaccionComponent implements OnInit{
   get producto_id(){return this.nuevo.get('producto_id'); }
   ngOnInit(): void {
     this.usuario=this.authServicio.usuarioActualValue
-    if(this.usuario.rol==2 && this.usuario.sucursal_id!=undefined)
+    console.log(this.usuario.rol)
+    console.log(this.usuario.sucursal_id)
+    if((this.usuario.rol==2||this.usuario.rol==3) && this.usuario.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.usuario.sucursal_id).subscribe(data=>{
         this.sucursal={
           id:data.id,

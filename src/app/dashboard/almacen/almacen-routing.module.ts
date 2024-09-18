@@ -10,10 +10,25 @@ import { ProductoSucursalComponent } from './producto-sucursal/producto-sucursal
 import { VerProductoLogComponent } from './inventario/ver-producto-log/ver-producto-log.component';
 
 const routes: Routes = [
-  {path:'categoria',component:CategoriaComponent},
-  {path:'producto',component:ProductoComponent},
+  {path:'categoria',component:CategoriaComponent,
+    canActivate:[isLoggedInGuard ,hasRoleGuard],
+    data:{
+      allowedRoles:['1','2']
+    },
+  },
+  {path:'producto',component:ProductoComponent,
+    canActivate:[isLoggedInGuard ,hasRoleGuard],
+    data:{
+      allowedRoles:['1','2']
+    },
+  },
   {path:'producto/sucursal',component:ProductoSucursalComponent},
-  {path:'producto/verlog/:id',component:VerProductoLogComponent},
+  {path:'producto/verlog/:id',component:VerProductoLogComponent,
+    canActivate:[isLoggedInGuard ,hasRoleGuard],
+    data:{
+      allowedRoles:['1','2']
+    },
+  },
   {
     path:'sucursal',
     component:SucursalComponent,

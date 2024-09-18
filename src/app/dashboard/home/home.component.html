@@ -9,7 +9,7 @@
   <div class="col-1"></div>
     <div class="col-xl-3 col-lg-4">
       <h4 class="text-center"><strong>GESTION PERSONAS</strong></h4>
-      <a href="/dashboard/usuario">
+      <a href="/dashboard/usuario" *ngIf="permisos.isEncargado()">
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
@@ -25,7 +25,7 @@
         </div>
       </a>
 
-      <a href="/dashboard/proveedor">
+      <a href="/dashboard/proveedor" *ngIf="permisos.isEncargado()">
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
@@ -79,7 +79,7 @@
               </div>
             </a>
 
-            <a href="/dashboard/almacen/producto">
+            <a href="/dashboard/almacen/producto" *ngIf="permisos.isEncargado()">
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">
@@ -95,7 +95,7 @@
                 </div>
               </div>
             </a>
-            <a href="/dashboard/almacen/inventario">
+            <a href="/dashboard/almacen/inventario" *ngIf="permisos.isEncargado()">
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">
@@ -128,7 +128,7 @@
               </div>
             </a>
 
-            <a href="/dashboard/venta/historial">
+            <a href="/dashboard/venta/historial" *ngIf="permisos.isEncargado()">
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">
@@ -142,7 +142,7 @@
                 </div>
               </div>
             </a>
-            <a href="/dashboard/venta/estadistico">
+            <a href="/dashboard/venta/estadistico" *ngIf="permisos.isEncargado()">
               <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">

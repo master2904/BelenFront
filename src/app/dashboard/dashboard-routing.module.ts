@@ -39,7 +39,7 @@ const routes: Routes = [
         path:'almacen',
         canActivate:[isLoggedInGuard ,hasRoleGuard],
         data:{
-          allowedRoles:['1','2']
+          allowedRoles:['1','2','3']
         },
         loadChildren:()=>import('./almacen/almacen.module').then(a => a.AlmacenModule),
       },
