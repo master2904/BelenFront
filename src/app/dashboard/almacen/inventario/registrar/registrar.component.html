@@ -5,17 +5,17 @@
           <form [formGroup]="agregar">
               <mat-form-field appearance="fill" *ngIf="tipo==1">
                   <mat-label>Stock</mat-label>
-                  <input matInput formControlName="stock" type="number" name="stock" minlength="5" maxlength="20" placeholder="Precio venta">
+                  <input matInput formControlName="stock" type="number" name="stock" minlength="5" maxlength="20" placeholder="Stock">
                   <mat-error>{{error_stock()}}</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill" *ngIf="tipo==2">
                   <mat-label>Precio Compra</mat-label>
-                  <input matInput formControlName="precio_compra" type="number" name="precio_compra" minlength="5" maxlength="20" placeholder="Precio Tienda">
+                  <input matInput formControlName="precio_compra" type="number" name="precio_compra" minlength="5" maxlength="20" placeholder="Precio Compra">
                   <mat-error >{{error_precio_compra()}}</mat-error>
               </mat-form-field>
               <mat-form-field appearance="fill" *ngIf="tipo==3">
                   <mat-label>Precio Venta</mat-label>
-                  <input matInput formControlName="precio_venta" type="number" name="precio_venta" minlength="5" maxlength="20" placeholder="Precio Final">
+                  <input matInput formControlName="precio_venta" type="number" name="precio_venta" minlength="5" maxlength="20" placeholder="Precio Venta">
                   <mat-error >{{error_precio_venta()}}</mat-error>
               </mat-form-field>
 

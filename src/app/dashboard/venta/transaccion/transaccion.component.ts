@@ -79,6 +79,9 @@ export class TransaccionComponent implements OnInit{
     this.usuario=this.authServicio.usuarioActualValue
     console.log(this.usuario.rol)
     console.log(this.usuario.sucursal_id)
+    if(this.usuario.rol==3){
+      this.precio?.disable()
+    }
     if((this.usuario.rol==2||this.usuario.rol==3) && this.usuario.sucursal_id!=undefined)
       this.sucursalServicio.buscar(this.usuario.sucursal_id).subscribe(data=>{
         this.sucursal={
